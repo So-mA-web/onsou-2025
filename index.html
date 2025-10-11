@@ -36,6 +36,8 @@
             align-items: center;
             justify-content: center;
             position: relative;
+        }
+        .header-bg img {
             opacity: 0.36;
         }
         .header-bg::after {
@@ -221,8 +223,8 @@
                 <a href="#news" class="block py-2 hover:bg-gray-200 transition-colors">News</a>
             </div>
         </nav>
-        <!-- ヘッダーコンテンツの文字色を白で維持（背景画像とのコントラストのため） -->
-        <div class="header-content text-center text-white z-20"> 
+        <!-- ヘッダーコンテンツの文字色を濃いグレー（見やすい色）に変更 -->
+        <div class="header-content text-center text-gray-900 z-20"> 
             <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-4">音奏</h1>
             <p class="text-xl md:text-2xl mb-8">-ONSOU-</p>
             <div class="space-x-4">
@@ -295,7 +297,7 @@
                 <div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- member-cardのCSSを更新済み -->
                     <div class="member-card text-center flex flex-col items-center">
-                        <img src="data/img/アイコン.png" alt="プログラマーの写真" class="rounded-full w-24 h-24 object-cover mb-4">
+                        <img src="img/アイコン.png" alt="プログラマーの写真" class="rounded-full w-24 h-24 object-cover mb-4">
                         <h3 class="text-xl font-bold text-gray-900">So-㎃</h3>
                         <p class="text-cyan-600 mb-2">UIデザイン・譜面制作等</p>
                         <p class="text-gray-600 text-sm">譜面制作とか色々</p>
@@ -613,4 +615,3 @@
     </script>
 </body>
 </html>
-
