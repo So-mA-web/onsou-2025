@@ -261,11 +261,12 @@
             </div>
         </section>
 
-        <!-- Download Section -->
+        <!-- Play Section (Download section modified) -->
         <section id="play" class="section">
             <h2 class="text-4xl font-bold text-center mb-12">Play</h2>
-            <div class="grid md:grid-cols-2 gap-8 text-center">
-                <!-- bg-gray-800 を bg-white に変更し、影を強調 -->
+            <!-- ダウンロード項目を3つにするため、レイアウトを md:grid-cols-3 に変更 -->
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <!-- Card 1: On-line Play -->
                 <div class="bg-white rounded-lg p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                     <i class="fas fa-globe text-5xl text-gray-500 mb-4"></i>
                     <h3 class="text-2xl font-bold mb-2 text-gray-800">On-line</h3>
@@ -274,12 +275,23 @@
                     <br>
                     <a href="https://play.unity.com/en/games/7ac383f8-9749-4f03-97b5-de8958157c4f/onsou" class="btn btn-primary">Unity PlayでPlay</a>
                 </div>
-                <!-- bg-gray-800 を bg-white に変更し、影を強調 -->
+                <!-- Card 2: Windows Download (Windows版に変更、URLはそのまま) -->
                 <div class="bg-white rounded-lg p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                    <i class="fab fa-google-drive text-5xl text-gray-500 mb-4"></i>
-                    <h3 class="text-2xl font-bold mb-2 text-gray-800">Google Drive</h3>
-                    <p class="text-gray-600 mb-4">PC版をダウンロード</p>
+                    <!-- Windowsアイコンに変更 -->
+                    <i class="fab fa-windows text-5xl text-gray-500 mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-2 text-gray-800">Windows版 (.exe形式)</h3>
+                    <p class="text-gray-600 mb-4">PCでダウンロードしてプレイ</p>
+                    <!-- URLは既存のものをそのまま利用 -->
                     <a href="https://drive.google.com/drive/folders/1Wxp91cX2EIKkAscfFWpEiQ3IQWd78Ncy?usp=sharing" class="btn btn-primary">Download</a>
+                </div>
+                <!-- Card 3: Android Download (Android版を新規追加、URLを指定) -->
+                <div class="bg-white rounded-lg p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                    <!-- Androidアイコンを追加 -->
+                    <i class="fab fa-android text-5xl text-gray-500 mb-4"></i>
+                    <h3 class="text-2xl font-bold mb-2 text-gray-800">Android版 (.apk形式)</h3>
+                    <p class="text-gray-600 mb-4">モバイルでダウンロードしてプレイ</p>
+                    <!-- 指定されたAndroid版URLを設定 -->
+                    <a href="https://drive.google.com/drive/folders/1EGbtbsXSJsziFtLqkK9jbiXaM8g3BliL" class="btn btn-primary">Download</a>
                 </div>
             </div>
         </section>
@@ -617,10 +629,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
