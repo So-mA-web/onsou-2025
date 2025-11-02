@@ -4,194 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>音奏 -ONSOU-</title>
-    <!-- ファビコンを追加 -->
     <link rel="icon" href="音奏ロゴ.webp" type="image/webp">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            /* ダークテーマからライトテーマへ変更 */
-            background-color: #f8f8f8; /* 非常に薄いグレー */
-            color: #1a202c; /* ダークグレーのテキスト */
-            scroll-behavior: smooth;
-        }
-        .section {
-            padding: 8rem 2rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .header-bg {
-            /* ビューポートの高さを100vhに戻し、画像サイズを400pxに調整しました */
-            background: url('音奏ロゴ.webp') no-repeat center center;
-            background-size: 75vh;
-            height: 75vh; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        .header-bg img {
-            opacity: 0.36;
-        }
-        .header-bg::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* 背景画像を保つために暗さを抑える */
-            background: rgba(255, 255, 255, 0.2); 
-            z-index: 1;
-        }
-        .header-content {
-            z-index: 2;
-        }
-        .btn {
-            @apply px-8 py-3 rounded-full font-bold transition-all duration-300 transform hover:scale-105;
-        }
-        .btn-primary {
-            @apply bg-cyan-500 text-white hover:bg-cyan-600;
-        }
-        .btn-secondary {
-            /* ライトテーマに合わせて変更 */
-            @apply bg-transparent border-2 border-white text-white hover:bg-white hover:text-cyan-500;
-        }
-        .glass-card {
-            /* ライトテーマに合わせて変更 */
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-        .news-item {
-            /* ライトテーマに合わせて変更 */
-            background-color: #ffffff;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 1px solid #e2e8f0;
-        }
-        .news-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        .member-card {
-            /* ライトテーマに合わせて変更 */
-            @apply bg-white rounded-lg p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
-        }
-        .char-card:hover .char-img {
-            transform: scale(1.1);
-        }
-        .char-img {
-            transition: transform 0.3s ease;
-        }
-        .nav-link {
-            position: relative;
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            transform: scaleX(0);
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #06b6d4;
-            transform-origin: bottom right;
-            transition: transform 0.25s ease-out;
-        }
-        .nav-link:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-        .hamburger-menu {
-            display: block;
-            cursor: pointer;
-            width: 30px;
-            height: 20px;
-            position: relative;
-        }
-        .hamburger-menu span {
-            display: block;
-            width: 100%;
-            height: 2px;
-            /* ライトテーマに合わせて変更 */
-            background-color: #1a202c;
-            position: absolute;
-            left: 0;
-            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-        }
-        .hamburger-menu.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-        .hamburger-menu.open span:nth-child(2) { opacity: 0; }
-        .hamburger-menu.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-        .slide-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-        .slide-menu.open {
-            max-height: 500px;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
-        .news-detail-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* ライトテーマに合わせて変更 */
-            background: rgba(255, 255, 255, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            overflow-y: auto;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .news-detail-container.open {
-            visibility: visible;
-            opacity: 1;
-        }
-        .news-detail-content {
-            /* ライトテーマに合わせて変更 */
-            background: #ffffff;
-            max-width: 800px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            position: relative;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        .news-detail-container.open .news-detail-content {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="text-gray-900">
 
-    <!-- Header Section -->
     <header class="header-bg relative" id="home">
-        <!-- ナビゲーションバーの背景色と文字色をライトテーマに合わせて変更 -->
         <nav class="fixed top-0 left-0 right-0 z-50 bg-white bg-opacity-95 transition-all duration-300 shadow-md" id="navbar">
             <div class="container mx-auto px-4 py-4 flex justify-between items-center">
                 <a href="#" class="flex items-center space-x-2">
@@ -201,13 +21,11 @@
                 <div class="hidden md:flex space-x-8 text-gray-700">
                     <a href="#about" class="nav-link hover:text-cyan-600 transition-colors duration-300">About</a>
                     <a href="#play" class="nav-link hover:text-cyan-600 transition-colors duration-300">Play</a>
-                    <!-- Q&Aを追加 -->
                     <a href="#qa" class="nav-link hover:text-cyan-600 transition-colors duration-300">Q&A</a>
                     <a href="#member" class="nav-link hover:text-cyan-600 transition-colors duration-300">Member</a>
                     <a href="#social" class="nav-link hover:text-cyan-600 transition-colors duration-300">Social</a>
                     <a href="#news" class="nav-link hover:text-cyan-600 transition-colors duration-300">News</a>
                 </div>
-                <!-- ハンバーガーメニューの色をCSSで調整しているため、ここではクラス変更なし -->
                 <button id="mobile-menu-btn" class="md:hidden text-gray-900 text-2xl">
                     <div class="hamburger-menu" id="hamburger">
                         <span></span>
@@ -216,22 +34,21 @@
                     </div>
                 </button>
             </div>
-            <!-- Mobile Menu の背景色と文字色をライトテーマに合わせて変更 -->
             <div id="mobile-menu" class="md:hidden bg-gray-100 text-gray-900 text-center py-4 slide-menu">
                 <a href="#about" class="block py-2 hover:bg-gray-200 transition-colors">About</a>
                 <a href="#play" class="block py-2 hover:bg-gray-200 transition-colors">Play</a>
-                <!-- Q&Aを追加 -->
                 <a href="#qa" class="block py-2 hover:bg-gray-200 transition-colors">Q&A</a>
                 <a href="#member" class="block py-2 hover:bg-gray-200 transition-colors">Member</a>
                 <a href="#social" class="block py-2 hover:bg-gray-200 transition-colors">Social</a>
                 <a href="#news" class="block py-2 hover:bg-gray-200 transition-colors">News</a>
             </div>
         </nav>
+        <div class="header-content">
+            </div>
     </header>
 
     <main class="container mx-auto px-4 py-8 md:py-16">
 
-        <!-- About Section -->
         <section id="about" class="section">
             <h2 class="text-4xl font-bold text-center mb-12">About</h2>
             <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -245,7 +62,6 @@
                     <p class="text-lg leading-relaxed">
                         直感的な操作でノーツを打ち、コンボを繋げましょう。難易度ごとに変わる譜面は、初心者から上級者まで、誰もが楽しめます。
                     </p>
-                    <!-- text-white を text-gray-700 に変更（bodyのデフォルトカラーを上書き） -->
                     <ul class="list-disc list-inside space-y-2 text-lg text-gray-700"> 
                         <li><i class="fas fa-music text-cyan-500 mr-2"></i> オリジナル楽曲多数収録</li>
                         <li><i class="fas fa-gamepad text-cyan-500 mr-2"></i> 多彩な難易度設定</li>
@@ -255,12 +71,9 @@
             </div>
         </section>
 
-        <!-- Play Section (Download section modified) -->
         <section id="play" class="section">
             <h2 class="text-4xl font-bold text-center mb-12">Play</h2>
-            <!-- ダウンロード項目を3つにするため、レイアウトを md:grid-cols-3 に変更 -->
             <div class="grid md:grid-cols-3 gap-8 text-center">
-                <!-- Card 1: On-line Play -->
                 <div class="bg-white rounded-lg p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                     <i class="fas fa-globe text-5xl text-gray-500 mb-4"></i>
                     <h3 class="text-2xl font-bold mb-2 text-gray-800">On-line</h3>
@@ -270,28 +83,21 @@
                     <br>
                     <a href="https://play.unity.com/en/games/7ac383f8-9749-4f03-97b5-de8958157c4f/onsou" class="btn btn-primary">Unity PlayでPlay</a>
                 </div>
-                <!-- Card 2: Windows Download (Windows版に変更、URLはそのまま) -->
                 <div class="bg-white rounded-lg p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                    <!-- Windowsアイコンに変更 -->
                     <i class="fab fa-windows text-5xl text-gray-500 mb-4"></i>
                     <h3 class="text-2xl font-bold mb-2 text-gray-800">Windows版 (.exe形式)</h3>
                     <p class="text-gray-600 mb-4">PCでダウンロードしてプレイ</p>
-                    <!-- URLは既存のものをそのまま利用 -->
                     <a href="https://drive.google.com/drive/folders/1cQY7V8gyUGhKPBtA6MmAJ3q2h_yR5nII?usp=drive_link" class="btn btn-primary">Download</a>
                 </div>
-                <!-- Card 3: Android Download (Android版を新規追加、URLを指定) -->
                 <div class="bg-white rounded-lg p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                    <!-- Androidアイコンを追加 -->
                     <i class="fab fa-android text-5xl text-gray-500 mb-4"></i>
                     <h3 class="text-2xl font-bold mb-2 text-gray-800">Android版 (.apk形式)</h3>
                     <p class="text-gray-600 mb-4">モバイルでダウンロードしてプレイ</p>
-                    <!-- 指定されたAndroid版URLを設定 -->
                     <a href="https://drive.google.com/drive/folders/1EGbtbsXSJsziFtLqkK9jbiXaM8g3BliL?usp=drive_link" class="btn btn-primary">Download</a>
                 </div>
             </div>
         </section>
         
-        <!-- New Q&A Section - 追加箇所 -->
         <section id="qa" class="section">
             <h2 class="text-4xl font-bold text-center mb-12">Q&A / よくある質問</h2>
             <div class="flex justify-center">
@@ -299,7 +105,6 @@
                     <i class="fas fa-question-circle text-6xl text-cyan-500 mb-4"></i>
                     <h3 class="text-2xl font-bold mb-4 text-gray-800">疑問や問題の解決策はこちら</h3>
                     <p class="text-gray-600 mb-6">ゲームに関する操作方法や既知の不具合など、よくある質問とその回答をご確認いただけます。</p>
-                    <!-- 指定されたURLへのリンクを設定 (target="_blank"で別タブで開く) -->
                     <a href="https://onsou2025.github.io/ONSOU-QA/" target="_blank" class="btn btn-primary text-lg">
                         Q&Aページへ移動 <i class="fas fa-external-link-alt ml-2"></i>
                     </a>
@@ -307,34 +112,28 @@
             </div>
         </section>
 
-        <!-- Member Section -->
         <section id="member" class="section">
             <h2 class="text-4xl font-bold text-center mb-12">Member</h2>
             <div class="md:flex md:space-x-8">
-                <!-- Main Creator (member-cardのCSSを更新済み) -->
                 <div class="md:w-1/3 text-center mb-8 md:mb-0 member-card">
                     <img src="https://placehold.co/300x300/e2e8f0/1a202c?text=Planner" alt="企画者の写真" class="rounded-full w-48 h-48 object-cover mb-4 mx-auto">
                     <h3 class="text-3xl font-bold text-gray-900">カンキツ霊夢</h3>
                     <p class="text-cyan-600 mb-2">企画・プログラム・UIデザイン・譜面制作等</p>
                     <p class="text-gray-600 text-sm">「音奏 -ONSOU-」の生みの親</p>
                 </div>
-                <!-- Other Members -->
                 <div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- member-cardのCSSを更新済み -->
                     <div class="member-card text-center flex flex-col items-center">
                         <img src="img/アイコン.png" alt="プログラマーの写真" class="rounded-full w-24 h-24 object-cover mb-4">
                         <h3 class="text-xl font-bold text-gray-900">ノァ / Noah</h3>
                         <p class="text-cyan-600 mb-2">UIデザイン・譜面制作等</p>
                         <p class="text-gray-600 text-sm">譜面制作とか色々</p>
                     </div>
-                    <!-- member-cardのCSSを更新済み -->
                     <div class="member-card text-center flex flex-col items-center">
                         <img src="https://placehold.co/150x150/e2e8f0/1a202c?text=Illustrator" alt="イラストレーターの写真" class="rounded-full w-24 h-24 object-cover mb-4">
                         <h3 class="text-xl font-bold text-gray-900">大福モドキ</h3>
                         <p class="text-cyan-600 mb-2">譜面制作等</p>
                         <p class="text-gray-600 text-sm">安心・安定の大福モドキ譜面</p>
                     </div>
-                    <!-- member-cardのCSSを更新済み -->
                     <div class="member-card text-center flex flex-col items-center">
                         <img src="https://placehold.co/150x150/e2e8f0/1a202c?text=Composer" alt="コンポーザーの写真" class="rounded-full w-24 h-24 object-cover mb-4">
                         <h3 class="text-xl font-bold text-gray-900">YU-TO</h3>
@@ -345,10 +144,8 @@
             </div>
         </section>
 
-        <!-- Social Section -->
         <section id="social" class="section">
             <h2 class="text-4xl font-bold text-center mb-12">Social</h2>
-            <!-- text-white を text-gray-900 に変更 -->
             <div class="flex justify-center space-x-8 text-gray-900">
                 <a href="https://www.youtube.com/channel/UCoAnS9vg0TWhv64tVN2DvXw" target="_blank" class="hover:text-red-600 transition-colors duration-300">
                     <i class="fab fa-youtube text-6xl"></i>
@@ -359,43 +156,32 @@
             </div>
         </section>
         
-        <!-- News Section -->
         <section id="news" class="section">
             <h2 class="text-4xl font-bold text-center mb-12">News</h2>
             <div id="news-list" class="space-y-6">
-                <!-- News items will be dynamically generated here -->
-            </div>
+                </div>
             <div id="view-all-container" class="mt-8 text-center" style="display: none;">
-                <!-- btn-secondaryの文字色をCSSで調整しているため、ここではクラス変更なし -->
                 <button id="view-all-btn" class="btn btn-secondary text-gray-900 border-gray-900 hover:text-cyan-500 hover:border-cyan-500">すべて見る</button>
             </div>
         </section>
     </main>
 
-    <!-- News Detail Section (initially hidden) -->
     <div id="news-detail-container" class="news-detail-container">
-        <!-- news-detail-content の背景を白に変更 -->
         <div class="news-detail-content bg-white text-gray-900">
-            <!-- ボタンの文字色をダークに変更 -->
             <button id="close-detail-btn" class="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-2xl">
                 <i class="fas fa-times"></i>
             </button>
             <div id="news-detail-list" class="space-y-6">
-                <!-- All news items will be dynamically generated here when "View All" is clicked -->
-            </div>
+                </div>
             <h2 id="detail-title" class="text-3xl font-bold mb-2" style="display: none;"></h2>
-            <!-- メタ情報の文字色をダークに変更 -->
             <div id="detail-meta" class="flex items-center space-x-4 text-sm text-gray-500 mb-6" style="display: none;">
                 <span id="detail-date"><i class="far fa-calendar-alt mr-1"></i></span>
-                <!-- カテゴリタグの文字色をダークに変更 -->
                 <span id="detail-category" class="bg-cyan-500 text-white text-xs font-bold px-3 py-1 rounded-full"></span>
             </div>
             <p id="detail-content" class="text-lg leading-relaxed text-gray-700" style="display: none;"></p>
         </div>
     </div>
 
-    <!-- Footer -->
-    <!-- 背景色と文字色をライトテーマに合わせて変更 -->
     <footer class="bg-gray-100 text-gray-600 text-center py-8">
         <div class="container mx-auto px-4 flex justify-center space-x-6 mb-4">
             <a href="https://www.youtube.com/channel/UCoAnS9vg0TWhv64tVN2DvXw" target="_blank" class="hover:text-red-600 transition-colors duration-300">
@@ -408,216 +194,7 @@
         <p>&copy; 2025 音奏 -ONSOU-. All Rights Reserved.</p>
     </footer>
 
-    <script>
-        // News data (edit this array to manage news articles)
-        const newsData = [
-            {
-                title: '音奏Q&A公開！',
-                date: '2025.10.31',
-                category: 'お知らせ',
-                content: '音ゲー「音奏 -ONSOU-」のQ&Aを本日公開しました！'
-            },
-            {
-                title: '音奏Q&A公開！',
-                date: '2025.10.29',
-                category: 'お知らせ',
-                content: '「音奏最新バージョンva1.0.0.24」を本日より配信開始！ダウンロードはPlayの欄からダウンロードページに移動できます。'
-            },
-            {
-                title: '公式サイトオープン！',
-                date: '2025.9.23',
-                category: 'お知らせ',
-                content: '音ゲー「音奏 -ONSOU-」の公式サイトが本日オープンしました。最新情報はこちらでご確認ください。SNSでも情報を発信していきますので、ぜひフォローをお願いします！'
-            },
-        ];
+    <script src="script.js"></script>
 
-        const newsListContainer = document.getElementById('news-list');
-        const viewAllContainer = document.getElementById('view-all-container');
-        const viewAllBtn = document.getElementById('view-all-btn');
-        const detailContainer = document.getElementById('news-detail-container');
-        const newsDetailList = document.getElementById('news-detail-list');
-        const closeBtn = document.getElementById('close-detail-btn');
-        const detailTitle = document.getElementById('detail-title');
-        const detailMeta = document.getElementById('detail-meta');
-        const detailDate = document.getElementById('detail-date');
-        const detailCategory = document.getElementById('detail-category');
-        const detailContent = document.getElementById('detail-content');
-
-        // Sort news by date in descending order
-        const sortedNewsData = newsData.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        function renderNewsList(data, limit = 3) {
-            newsListContainer.innerHTML = '';
-            const displayedNews = data.slice(0, limit);
-            
-            displayedNews.forEach((item, index) => {
-                const newsItem = document.createElement('div');
-                // ライトテーマに合わせてクラスを変更
-                newsItem.className = 'news-item flex flex-col md:flex-row items-start p-6 rounded-lg shadow-md';
-                newsItem.dataset.index = index;
-                newsItem.innerHTML = `
-                    <div class="w-full md:w-auto md:flex-shrink-0 mb-4 md:mb-0 md:mr-6">
-                        <!-- カテゴリタグの色をアクセントカラーで維持 -->
-                        <span class="bg-cyan-600 text-white text-xs font-bold px-3 py-1 rounded-full">${item.category}</span>
-                    </div>
-                    <div>
-                        <!-- 文字色を調整 -->
-                        <span class="text-gray-500 text-sm block mb-1">${item.date}</span>
-                        <h3 class="text-xl font-bold mb-2 text-gray-900">${item.title}</h3>
-                        <p class="text-gray-700">${item.content.substring(0, 100)}...</p>
-                    </div>
-                `;
-                newsListContainer.appendChild(newsItem);
-            });
-
-            // Show "View All" button if there are more than 3 news items
-            if (data.length > limit) {
-                viewAllContainer.style.display = 'block';
-            } else {
-                viewAllContainer.style.display = 'none';
-            }
-
-            // Add click listeners to newly created elements
-            document.querySelectorAll('.news-item').forEach(item => {
-                item.addEventListener('click', (e) => {
-                    const index = e.currentTarget.dataset.index;
-                    const itemData = sortedNewsData[index];
-                    
-                    detailTitle.textContent = itemData.title;
-                    detailDate.textContent = itemData.date;
-                    detailCategory.textContent = itemData.category;
-                    // カテゴリタグの色をアクセントカラーで維持
-                    detailCategory.className = 'bg-cyan-600 text-white text-xs font-bold px-3 py-1 rounded-full';
-                    detailContent.textContent = itemData.content;
-                    
-                    // Hide "view all" section and show single news content
-                    newsDetailList.style.display = 'none';
-                    detailTitle.style.display = 'block';
-                    detailMeta.style.display = 'flex';
-                    detailContent.style.display = 'block';
-
-                    detailContainer.classList.add('open');
-                    document.body.style.overflow = 'hidden';
-                });
-            });
-        }
-        
-        // Render all news in the popup
-        function renderAllNewsInPopup() {
-            newsDetailList.innerHTML = '';
-            sortedNewsData.forEach((item) => {
-                const newsItem = document.createElement('div');
-                // ライトテーマに合わせてクラスを変更
-                newsItem.className = 'news-item flex flex-col md:flex-row items-start p-6 rounded-lg shadow-md';
-                newsItem.innerHTML = `
-                    <div class="w-full md:w-auto md:flex-shrink-0 mb-4 md:mb-0 md:mr-6">
-                        <!-- カテゴリタグの色をアクセントカラーで維持 -->
-                        <span class="bg-cyan-600 text-white text-xs font-bold px-3 py-1 rounded-full">${item.category}</span>
-                    </div>
-                    <div>
-                        <!-- 文字色を調整 -->
-                        <span class="text-gray-500 text-sm block mb-1">${item.date}</span>
-                        <h3 class="text-xl font-bold mb-2 text-gray-900">${item.title}</h3>
-                        <p class="text-gray-700">${item.content}</p>
-                    </div>
-                `;
-                newsDetailList.appendChild(newsItem);
-            });
-        }
-
-        // Initial rendering of news list
-        renderNewsList(sortedNewsData);
-
-        // View All button functionality
-        viewAllBtn.addEventListener('click', () => {
-            renderAllNewsInPopup();
-            
-            // Hide single news content section and show "view all" section
-            newsDetailList.style.display = 'block';
-            detailTitle.style.display = 'none';
-            detailMeta.style.display = 'none';
-            detailContent.style.display = 'none';
-
-            detailContainer.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        });
-
-        // Close the detail view
-        closeBtn.addEventListener('click', () => {
-            detailContainer.classList.remove('open');
-            document.body.style.overflow = 'auto';
-        });
-
-        // Close on outside click
-        detailContainer.addEventListener('click', (e) => {
-            if (e.target === detailContainer) {
-                detailContainer.classList.remove('open');
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-                
-                // Close mobile menu after clicking a link
-                if (mobileMenu.classList.contains('open')) {
-                    mobileMenu.classList.remove('open');
-                    hamburger.classList.remove('open');
-                }
-            });
-        });
-
-        // Hamburger menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const hamburger = document.getElementById('hamburger');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('open');
-            hamburger.classList.toggle('open');
-        });
-
-        // Handle responsiveness
-        function handleResize() {
-            if (window.innerWidth >= 768) {
-                mobileMenu.classList.remove('open');
-                hamburger.classList.remove('open');
-            }
-        }
-        
-        window.addEventListener('resize', handleResize);
-        handleResize();
-
-        // Scroll animation for sections
-        const sections = document.querySelectorAll('.section');
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.2
-        });
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    </script>
 </body>
 </html>
-
-
-
-
-
