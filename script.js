@@ -1,6 +1,12 @@
 // News data (edit this array to manage news articles)
 const newsData = [
     {
+        title: '音奏オリジナル楽曲ステーション公開！',
+        date: '2025.11.03',
+        category: 'お知らせ',
+        content: '音ゲー「音奏 -ONSOU-」のMusicStationを本日公開しました！'
+    },
+    {
         title: '音奏Q&A公開！',
         date: '2025.10.31',
         category: 'お知らせ',
@@ -206,4 +212,5 @@ const observer = new IntersectionObserver((entries, observer) => {
 
 sections.forEach(section => {
     observer.observe(section);
+
 });
