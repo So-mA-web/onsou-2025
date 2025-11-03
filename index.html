@@ -8,6 +8,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* スロー回転アニメーションの定義 */
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 10s linear infinite;
+        }
+    </style>
 </head>
 <body class="text-gray-900">
 
@@ -21,6 +31,7 @@
                 <div class="hidden md:flex space-x-8 text-gray-700">
                     <a href="#about" class="nav-link hover:text-cyan-600 transition-colors duration-300">About</a>
                     <a href="#play" class="nav-link hover:text-cyan-600 transition-colors duration-300">Play</a>
+                    <a href="#music-station" class="nav-link hover:text-cyan-600 transition-colors duration-300">Music Station</a> <!-- 追加: Music Stationへのリンク -->
                     <a href="#qa" class="nav-link hover:text-cyan-600 transition-colors duration-300">Q&A</a>
                     <a href="#member" class="nav-link hover:text-cyan-600 transition-colors duration-300">Member</a>
                     <a href="#social" class="nav-link hover:text-cyan-600 transition-colors duration-300">Social</a>
@@ -37,6 +48,7 @@
             <div id="mobile-menu" class="md:hidden bg-gray-100 text-gray-900 text-center py-4 slide-menu">
                 <a href="#about" class="block py-2 hover:bg-gray-200 transition-colors">About</a>
                 <a href="#play" class="block py-2 hover:bg-gray-200 transition-colors">Play</a>
+                <a href="#music-station" class="block py-2 hover:bg-gray-200 transition-colors">Music Station</a> <!-- 追加: Music Stationへのリンク -->
                 <a href="#qa" class="block py-2 hover:bg-gray-200 transition-colors">Q&A</a>
                 <a href="#member" class="block py-2 hover:bg-gray-200 transition-colors">Member</a>
                 <a href="#social" class="block py-2 hover:bg-gray-200 transition-colors">Social</a>
@@ -116,6 +128,22 @@
             </div>
         </section>
         
+        <!-- Music Stationセクションの追加 (Q&A形式で目立つように) -->
+        <section id="music-station" class="section">
+            <h2 class="text-4xl font-bold text-center mb-12">Music Station / 楽曲紹介</h2>
+            <div class="flex justify-center">
+                <div class="bg-white rounded-lg p-10 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 text-center w-full max-w-lg border-2 border-cyan-500">
+                    <i class="fas fa-compact-disc text-6xl text-cyan-500 mb-4 animate-spin-slow"></i>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">「音奏 -ONSOU-」の全楽曲をチェック！</h3>
+                    <p class="text-gray-600 mb-6">ゲームに収録されているオリジナル楽曲の詳細情報や試聴が可能です。</p>
+                    <a href="https://onsou2025.github.io/Music-Station/" target="_blank" class="btn btn-primary text-lg bg-cyan-600 hover:bg-cyan-700">
+                        MUSIC STATIONへGO <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Music Stationセクションの追加 終了 -->
+
         <section id="qa" class="section">
             <h2 class="text-4xl font-bold text-center mb-12">Q&A / よくある質問</h2>
             <div class="flex justify-center">
@@ -216,5 +244,3 @@
 
 </body>
 </html>
-
-
